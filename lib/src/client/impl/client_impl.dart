@@ -253,6 +253,9 @@ class _ClientImpl implements Client {
       _connected = null;
       _error.close();
       _clientClosed.complete();
+      // bat down the _clientClosed indicator now that we've completed the closing in case the 
+      // client is re-opened.
+      _clientClosed = null;
     });
 
     return _clientClosed.future;
